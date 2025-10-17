@@ -1,0 +1,30 @@
+services:
+  nbgrader:
+    image: pranayjanagama/student_setup:latest
+    # network_mode: host 
+    ports: 
+      - 9000:8000    
+      # - 8579:8579
+    volumes: 
+      - ./dist-packages/nativeauthenticator/templates:/usr/local/lib/python3.10/dist-packages/nativeauthenticator/templates
+      - ./dist-packages/jupyterhub/apihandlers:/usr/local/lib/python3.10/dist-packages/jupyterhub/apihandlers
+      - ./exchange:/usr/local/share/nbgrader/exchange
+      - /external_storage/Tantrik/tantrik_docker/userhome:/home
+      - ./srv/manage_assignments:/srv/manage_assignments
+      - ./srv/nbgrader/jupyterhub:/srv/nbgrader/jupyterhub
+      - ./srv/nbgrader/nbgrader:/srv/nbgnano rader/nbgrader
+      - ./srv/shareddata:/srv/shareddata
+      - ./@jupyterlab:/usr/local/share/jupyter/lab/schemas/@jupyterlab
+      - ./custom_pages:/usr/local/share/custom_pages
+      - ./custom_pages/copypaste.js:/usr/local/share/jupyter/labextensions/@jupyter/nbgrader/static/lib_course_list_courselist_js-lib_course_list_index_js-lib_index_js.ef460783d34f84153eeb.js
+      - ./setup_pages/setup_script.sh:/usr/local/bin/setup_script.sh
+      - ./setup_pages/change_permissions.sh:/usr/local/bin/change_permissions.sh
+      
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

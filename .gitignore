@@ -1,1 +1,14 @@
 custom_pages/*.deb*
+
+srv/shareddata/datasets/**
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+exchange/
+
+srv/manage_assignments/uploaded_files/
+
+srv/nbgrader/jupyterhub/
